@@ -1,8 +1,8 @@
 import { useSelector, useDispatch } from "react-redux";
 import { bindActionCreators } from "redux";
 import { actionCreators } from "./../state/index";
-
 import React from "react";
+import {useEffect} from 'react'
 
 function WeatherContainer() {
   const account = useSelector((state) => state.account);
@@ -12,7 +12,7 @@ function WeatherContainer() {
     actionCreators,
     dispatch
   );
-
+ console.log(process.env.WEATHER_API_KEY)
   return (
     <>
       <div className="weather-container">HIEIHDIASD</div>
