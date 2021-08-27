@@ -28,6 +28,39 @@
   color: #61dafb;
 }
 
+.main-container {
+  display: flex;
+  
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background: rgb(193, 222, 230);
+  background: linear-gradient(
+    180deg,
+    rgba(193, 222, 230, 1) 0%,
+    rgba(57, 175, 213, 1) 60%
+  );
+}
+.weather-container{
+  width: 83%;
+  height: 88%;
+  background-color: pink;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.weather-photo {
+  width: 62%;
+  height: 100%;
+  background-color: blue;
+}
+.weather-info {
+  width: 38%;
+  height: 100%;
+  background-color: green;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
