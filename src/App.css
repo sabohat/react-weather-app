@@ -1,5 +1,6 @@
 .App {
   text-align: center;
+  box-sizing: border-box;
 }
 
 .App-logo {
@@ -27,10 +28,13 @@
 .App-link {
   color: #61dafb;
 }
+* {
+  box-sizing: border-box;
+}
 
 .main-container {
   display: flex;
-  
+
   align-items: center;
   justify-content: center;
   height: 100vh;
@@ -41,7 +45,7 @@
     rgba(57, 175, 213, 1) 60%
   );
 }
-.weather-container{
+.weather-container {
   width: 83%;
   height: 88%;
   background-color: pink;
@@ -53,12 +57,62 @@
 .weather-photo {
   width: 62%;
   height: 100%;
-  background-color: blue;
+  background: rgb(172, 215, 226);
+  background: linear-gradient(
+    0deg,
+    rgba(172, 215, 226, 1) 0%,
+    rgba(57, 162, 213, 1) 81%
+  );
+  padding: 50px 80px 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: space-between;
+  color: white;
+}
+.weather__logo {
+  font-size: 14px;
+}
+.weather__data {
+  width: 405px;
+  height: 80px;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+.weather__degree {
+  font-size: 105px;
+  margin-bottom: -20px;
+}
+.weather__details {
+  width: 100%;
+  display: flex;
+
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.weather__description {
+  display: flex;
+  flex-direction: column
+}
+.weather__city, 
+.weather__icon{
+  font-size: 50px;
+}
+.weather__description-text{
+  font-size: 14px;
 }
 .weather-info {
   width: 38%;
   height: 100%;
-  background-color: green;
+  background: rgb(97, 157, 182);
+  background: linear-gradient(
+    0deg,
+    rgb(97, 157, 182) 19%,
+    rgb(70, 117, 156) 58%
+  );
 }
 
 @keyframes App-logo-spin {
