@@ -112,7 +112,7 @@ function getWeatherInfo(e, setWeather){
   }
 }
 function fetchData(setWeather, location){
-  const weatherURL = `http://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${keys.OWM_KEY}`;
+  const weatherURL = `aahttp://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${keys.OWM_KEY}`;
     // const weatherURL =`http://api.openweathermap.org/data/2.5/forecast?zip=11102&units=imperial&APPID=${keys.OWM_KEY}`
     fetch(weatherURL)
       .then((res) => res.json())
