@@ -1,25 +1,13 @@
 import React from "react";
 import { useEffect, useState} from "react";
 import keys from "./../API_KEYS";
-
+import { FaSearch} from 'react-icons/fa';
 function WeatherContainer() {
 
   const [weather, setWeather] = useState({});
 
   useEffect(() => {
-    const weatherURL = `http://api.openweathermap.org/data/2.5/weather?q=tashkent&units=metric&appid=${keys.OWM_KEY}`;
-    // const weatherURL =`http://api.openweathermap.org/data/2.5/forecast?zip=11102&units=imperial&APPID=${keys.OWM_KEY}`
-    fetch(weatherURL)
-      .then((res) => res.json())
-      .then((data) => setWeather({location: data.name, 
-      temp: Math.round(data.main.temp),
-      definition: data.weather[0].main,
-      cloudy: data.clouds?.all || 0,
-      humidity: data.main.humidity,
-      pressure: data.main.pressure,
-      wind: data.wind.speed
-    }))
-      .catch((err) => console.log("Error", err))
+    fetchData(setWeather, 'tashkent')
   }, []);
 
 
@@ -53,17 +41,26 @@ function WeatherContainer() {
               className="weather-info__input"
               placeholder="Another location"
             ></input>
-            <button className="submit-button" type="submit">
-              {weather.name}
+            <button className="submit-button" type="submit" onClick={()=> getWeatherInfo()}>
+             <FaSearch/>
             </button>
           </form>
           <div className="weather__location">
             <div className="cities">
               <ul className="city-list">
-                <li className="city">Birmingham</li>
-                <li className="city">Birmingham</li>
-                <li className="city">Birmingham</li>
-                <li className="city">Birmingham</li>
+                <li className="city" onClick={()=> fetchData(setWeather, 'Andijan')}>Andijan</li>
+                <li className="city" onClick={()=> fetchData(setWeather, 'Bukhara')}>Bukhara</li>
+                <li className="city" onClick={()=> fetchData(setWeather, 'Fergana')}>Fergana</li>
+                <li className="city" onClick={()=> fetchData(setWeather, 'Jizzakh')}>Jizzakh</li>
+                <li className="city" onClick={()=> fetchData(setWeather, 'Khorezm')}>Khorezm</li>
+                <li className="city" onClick={()=> fetchData(setWeather, 'Namangan')}>Namangan</li>
+                <li className="city" onClick={()=> fetchData(setWeather, 'Navoiy')}>Navoiy</li>
+                <li className="city" onClick={()=> fetchData(setWeather, 'Kashkadaryo')}>Kashkadaryo</li>
+                <li className="city" onClick={()=> fetchData(setWeather, 'Samarkand')}>Samarkand</li>
+                <li className="city" onClick={()=> fetchData(setWeather, 'Sirdaryo')}>Sirdaryo</li>
+                <li className="city" onClick={()=> fetchData(setWeather, 'Surxondaryo')}>Surxondaryo</li>
+                <li className="city" onClick={()=> fetchData(setWeather, 'Tashkent')}>Tashkent</li>
+                <li className="city" onClick={()=> fetchData(setWeather, 'Karakalpakstan')}>Karakalpakstan</li>
               </ul>
             </div>
           </div>
@@ -93,6 +90,22 @@ function WeatherContainer() {
       </div>
     </div>
   );
+}
+function getWeatherInfo(){}
+function fetchData(setWeather, location){
+  const weatherURL = `http://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${keys.OWM_KEY}`;
+    // const weatherURL =`http://api.openweathermap.org/data/2.5/forecast?zip=11102&units=imperial&APPID=${keys.OWM_KEY}`
+    fetch(weatherURL)
+      .then((res) => res.json())
+      .then((data) => setWeather({location: data.name, 
+      temp: Math.round(data?.main?.temp),
+      definition: data.weather[0].main,
+      cloudy: data.clouds?.all || 0,
+      humidity: data?.main?.humidity,
+      pressure: data?.main?.pressure,
+      wind: data.wind.speed
+    }))
+      .catch((err) => console.log("Error", err))
 }
 
 export default WeatherContainer;
