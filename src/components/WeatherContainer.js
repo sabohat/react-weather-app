@@ -1,60 +1,47 @@
-import { useSelector, useDispatch } from "react-redux";
-import { bindActionCreators } from "redux";
-import { actionCreators } from "./../state/index";
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState} from "react";
 import keys from "./../API_KEYS";
 
-console.log(keys);
 function WeatherContainer() {
-  const weather = useSelector((state) => state);
-  const dispatch = useDispatch();
 
-  const { depositMoney, withdrawMoney, updateWeatherInfo } = bindActionCreators(
-    actionCreators,
-    dispatch
-  );
+  const [weather, setWeather] = useState({});
 
   useEffect(() => {
     const weatherURL = `http://api.openweathermap.org/data/2.5/weather?q=tashkent&units=metric&appid=${keys.OWM_KEY}`;
     // const weatherURL =`http://api.openweathermap.org/data/2.5/forecast?zip=11102&units=imperial&APPID=${keys.OWM_KEY}`
     fetch(weatherURL)
       .then((res) => res.json())
-      .then((data) => dispatch(updateWeatherInfo(data)))
-      .catch((err) => console.log("Error", err));
+      .then((data) => setWeather({location: data.name, 
+      temp: Math.round(data.main.temp),
+      definition: data.weather[0].main,
+      cloudy: data.clouds?.all || 0,
+      humidity: data.main.humidity,
+      pressure: data.main.pressure,
+      wind: data.wind.speed
+    }))
+      .catch((err) => console.log("Error", err))
   }, []);
-  
-  function fetchUrlData(){
-    const weatherURL = `http://api.openweathermap.org/data/2.5/weather?q=tashkent&units=metric&appid=${keys.OWM_KEY}`;
-    // const weatherURL =`http://api.openweathermap.org/data/2.5/forecast?zip=11102&units=imperial&APPID=${keys.OWM_KEY}`
-    return function fetch(){
-      return fetch(weatherURL)
-      .then((res) => res.json())
-      .then((data) => dispatch(updateWeatherInfo(data)))
-      .catch((err) => console.log("Error", err));
-    }
-  }
+
 
   return (
     <div className="main-container">
-      <button onClick={() => fetchUrlData()}>{weather.name} Hee</button>
       <div className="weather-container">
         <div className="weather-photo">
           <div className="weather__logo">
             <b>the.weather</b>
           </div>
           <div className="weather__data">
-            <div className="weather__degree">26*</div>
+            <div className="weather__degree">{weather.temp ? weather.temp : 0 }&#176;</div>
             <div className="weather__data-details">
               <div className="weather__description">
-                <div className="weather__city">London</div>
+                <div className="weather__city">{weather.location ? weather.location : 'Not found'}</div>
                 <div className="weather__description-text">
                   10:36 - Tuesday, 22 Oct '19
                 </div>
               </div>
               <div className="weather__description">
                 <div className="weather__icon ">O</div>
-                <div className="weather__description-text">Sunny</div>
+                <div className="weather__description-text">{weather.definition ? weather.definition: ''}</div>
               </div>
             </div>
           </div>
@@ -88,16 +75,16 @@ function WeatherContainer() {
             <div className="cities">
               <ul className="data-list">
                 <li className="data">
-                  <span>Cloudy</span> <span>Data %</span>
+                  <span>Cloudy</span> <span>{weather.cloudy ? weather.cloudy : 0} %</span>
                 </li>
                 <li className="data">
-                  <span>Humidity</span> <span>Data %</span>
+                  <span>Humidity</span> <span>{weather.humidity ? weather.humidity : 0} %</span>
                 </li>
                 <li className="data">
-                  <span>Wind</span> <span>Data km/h</span>
+                  <span>Wind</span> <span>{weather.wind ? weather.wind : 0} km/h</span>
                 </li>
                 <li className="data">
-                  <span>Rain</span> <span>Data mm</span>
+                  <span>Pressure</span> <span>{weather?.pressure ? weather.pressure : 0}</span>
                 </li>
               </ul>
             </div>
