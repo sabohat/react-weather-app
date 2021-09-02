@@ -7,25 +7,37 @@ import keys from "./../API_KEYS";
 
 console.log(keys);
 function WeatherContainer() {
-  const account = useSelector((state) => state.account);
+  const weather = useSelector((state) => state);
   const dispatch = useDispatch();
 
-  const { depositMoney, withdrawMoney } = bindActionCreators(
+  const { depositMoney, withdrawMoney, updateWeatherInfo } = bindActionCreators(
     actionCreators,
     dispatch
   );
 
-  // useEffect(() => {
-  //   console.log("useEffect");
-  //   // const weatherURL =`http://api.openweathermap.org/data/2.5/forecast?zip=11102&units=imperial&APPID=${keys.OWM_KEY}`
-  //   fetch(weatherURL)
-  //   .then(res => res.json())
-  //   .then(data => console.log("Data List Loaded", data.list))
-  //   .catch(err => console.log("Error", err));
-  // }, []);
+  useEffect(() => {
+    const weatherURL = `http://api.openweathermap.org/data/2.5/weather?q=tashkent&units=metric&appid=${keys.OWM_KEY}`;
+    // const weatherURL =`http://api.openweathermap.org/data/2.5/forecast?zip=11102&units=imperial&APPID=${keys.OWM_KEY}`
+    fetch(weatherURL)
+      .then((res) => res.json())
+      .then((data) => dispatch(updateWeatherInfo(data)))
+      .catch((err) => console.log("Error", err));
+  }, []);
+  
+  function fetchUrlData(){
+    const weatherURL = `http://api.openweathermap.org/data/2.5/weather?q=tashkent&units=metric&appid=${keys.OWM_KEY}`;
+    // const weatherURL =`http://api.openweathermap.org/data/2.5/forecast?zip=11102&units=imperial&APPID=${keys.OWM_KEY}`
+    return function fetch(){
+      return fetch(weatherURL)
+      .then((res) => res.json())
+      .then((data) => dispatch(updateWeatherInfo(data)))
+      .catch((err) => console.log("Error", err));
+    }
+  }
 
   return (
     <div className="main-container">
+      <button onClick={() => fetchUrlData()}>{weather.name} Hee</button>
       <div className="weather-container">
         <div className="weather-photo">
           <div className="weather__logo">
@@ -50,12 +62,14 @@ function WeatherContainer() {
 
         <div className="weather-info">
           <form>
-          <input
-            className="weather-info__input"
-            placeholder="Another location"
-          ></input>
-          <button className="submit-button" type="submit">Search</button>
-</form>
+            <input
+              className="weather-info__input"
+              placeholder="Another location"
+            ></input>
+            <button className="submit-button" type="submit">
+              {weather.name}
+            </button>
+          </form>
           <div className="weather__location">
             <div className="cities">
               <ul className="city-list">
@@ -67,14 +81,24 @@ function WeatherContainer() {
             </div>
           </div>
           <div className="weather__details">
-            <div className="header"> <b>Weather Details</b> </div>
+            <div className="header">
+              {" "}
+              <b>Weather Details</b>{" "}
+            </div>
             <div className="cities">
               <ul className="data-list">
-                <li className="data"><span>Cloudy</span> <span>Data %</span></li>
-                <li className="data"><span>Humidity</span> <span>Data %</span></li>
-                <li className="data"><span>Wind</span> <span>Data km/h</span></li>
-                <li className="data"><span>Rain</span> <span>Data mm</span></li>
-                
+                <li className="data">
+                  <span>Cloudy</span> <span>Data %</span>
+                </li>
+                <li className="data">
+                  <span>Humidity</span> <span>Data %</span>
+                </li>
+                <li className="data">
+                  <span>Wind</span> <span>Data km/h</span>
+                </li>
+                <li className="data">
+                  <span>Rain</span> <span>Data mm</span>
+                </li>
               </ul>
             </div>
           </div>

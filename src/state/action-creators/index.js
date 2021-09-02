@@ -16,3 +16,11 @@ export const withdrawMoney = (amount) => {
     });
   }
 }
+export const updateWeatherInfo = (info) => {
+  return (dispatch) => {
+    dispatch({
+      type: 'UPDATE',
+      payload: info
+    });
+  }
+}
