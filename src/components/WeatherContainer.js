@@ -36,12 +36,12 @@ function WeatherContainer() {
         </div>
 
         <div className="weather-info">
-          <form>
+          <form onSubmit={(e)=> getWeatherInfo(e, setWeather)}>
             <input
               className="weather-info__input"
               placeholder="Another location"
             ></input>
-            <button className="submit-button" type="submit" onClick={()=> getWeatherInfo()}>
+            <button className="submit-button" type="submit" >
              <FaSearch/>
             </button>
           </form>
@@ -91,7 +91,17 @@ function WeatherContainer() {
     </div>
   );
 }
-function getWeatherInfo(){}
+function getWeatherInfo(e, setWeather){
+  e.preventDefault()
+  console.log(e.target.children[0].value)
+  if(e.target.children[0].value === ''){
+    alert('Please enter a valid location')
+  }
+  else{
+    fetchData(setWeather, e.target.children[0].value)
+    e.target.children[0].value = ''
+  }
+}
 function fetchData(setWeather, location){
   const weatherURL = `http://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${keys.OWM_KEY}`;
     // const weatherURL =`http://api.openweathermap.org/data/2.5/forecast?zip=11102&units=imperial&APPID=${keys.OWM_KEY}`
