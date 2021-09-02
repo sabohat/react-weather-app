@@ -37,7 +37,7 @@ function WeatherContainer() {
                 </div>
               </div>
               <div className="weather__description">
-                <div className="weather__icon "></div>
+                <div className="weather__icon "><img src={`https://openweathermap.org/img/wn/${weather?.icon}@2x.png`} alt="Logo" /></div>
                 <div className="weather__description-text">{weather.definition ? weather.definition: ''}</div>
               </div>
             </div>
@@ -122,7 +122,8 @@ function fetchData(setWeather, location){
       cloudy: data.clouds?.all || 0,
       humidity: data?.main?.humidity,
       pressure: data?.main?.pressure,
-      wind: data.wind.speed
+      wind: data.wind.speed,
+      icon: data.weather[0].icon
     }))
       .catch((err) => console.log("Error", err))
 }
