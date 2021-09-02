@@ -2,13 +2,22 @@ import React from "react";
 import { useEffect, useState} from "react";
 import keys from "./../API_KEYS";
 import { FaSearch} from 'react-icons/fa';
+import moment from 'moment';
+moment().format();
+
 function WeatherContainer() {
 
   const [weather, setWeather] = useState({});
-
+  const [time, setTime] = useState(moment().format("h:mm - dddd, D MMM'YY"));
   useEffect(() => {
+    console.log(moment().format('LLLL'));
     fetchData(setWeather, 'tashkent')
   }, []);
+
+  setInterval(() => {
+    setTime(moment().format("h:mm - dddd, D MMM'YY"));
+
+}, 1000);  
 
 
   return (
@@ -24,11 +33,11 @@ function WeatherContainer() {
               <div className="weather__description">
                 <div className="weather__city">{weather.location ? weather.location : 'Not found'}</div>
                 <div className="weather__description-text">
-                  10:36 - Tuesday, 22 Oct '19
+                  {time}
                 </div>
               </div>
               <div className="weather__description">
-                <div className="weather__icon ">O</div>
+                <div className="weather__icon "></div>
                 <div className="weather__description-text">{weather.definition ? weather.definition: ''}</div>
               </div>
             </div>
