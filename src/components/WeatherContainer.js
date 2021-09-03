@@ -41,6 +41,7 @@ function WeatherContainer() {
                   <img
                     src={`https://openweathermap.org/img/wn/${weather?.icon}@2x.png`}
                     alt="Logo"
+                    style={{ width: "50px" }}
                   />
                 </div>
                 <div className="weather__description-text">
@@ -188,7 +189,7 @@ function getWeatherInfo(e, setWeather) {
 }
 function fetchData(setWeather, location) {
   console.log(process.env.REACT_APP_OWM_KEY)
-  const weatherURL = `http://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${process.env.REACT_APP_OWM_KEY}`;
+  const weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${process.env.REACT_APP_OWM_KEY}`;
   // const weatherURL =`http://api.openweathermap.org/data/2.5/forecast?zip=11102&units=imperial&APPID=${keys.OWM_KEY}`
   fetch(weatherURL)
     .then((res) => res.json())
