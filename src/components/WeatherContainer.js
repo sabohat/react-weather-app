@@ -21,7 +21,18 @@ function WeatherContainer() {
   return (
     <div className="main-container">
       <div className="weather-container">
-        <div className="weather-photo">
+        <div
+          className="weather-photo"
+          style={
+            weather.definition === "Clear"  ?{
+              backgroundImage: "url(/images/clear-day.jpg)",
+              backgroundSize: "cover",
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+            } : null
+            
+          }
+        >
           <div className="weather__logo">
             <b>the.weather</b>
           </div>
@@ -188,7 +199,7 @@ function getWeatherInfo(e, setWeather) {
   }
 }
 function fetchData(setWeather, location) {
-  console.log(process.env.REACT_APP_OWM_KEY)
+  console.log(process.env.REACT_APP_OWM_KEY);
   const weatherURL = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${process.env.REACT_APP_OWM_KEY}`;
   // const weatherURL =`http://api.openweathermap.org/data/2.5/forecast?zip=11102&units=imperial&APPID=${keys.OWM_KEY}`
   fetch(weatherURL)

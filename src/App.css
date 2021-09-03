@@ -52,7 +52,6 @@ li {
 .weather-container {
   width: 83%;
   height: 88%;
-  background-color: pink;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -212,7 +211,9 @@ li {
     min-height: 1200px;
     width: 100%;
   }
-  .weather-photo {
+  .weather-photo {  
+    background-size: cover;
+    background-repeat: no-repeat;
     margin:0;
     width: 100%;
     height: 50%;
