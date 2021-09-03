@@ -1,8 +1,9 @@
 import React from "react";
 import { useEffect, useState } from "react";
-import keys from "./../API_KEYS";
 import { FaSearch } from "react-icons/fa";
 import moment from "moment";
+import dotenv from "dotenv";
+dotenv.config();
 moment().format();
 
 function WeatherContainer() {
@@ -186,7 +187,8 @@ function getWeatherInfo(e, setWeather) {
   }
 }
 function fetchData(setWeather, location) {
-  const weatherURL = `http://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${keys.OWM_KEY}`;
+  console.log(process.env.REACT_APP_OWM_KEY)
+  const weatherURL = `http://api.openweathermap.org/data/2.5/weather?q=${location}&units=metric&appid=${process.env.REACT_APP_OWM_KEY}`;
   // const weatherURL =`http://api.openweathermap.org/data/2.5/forecast?zip=11102&units=imperial&APPID=${keys.OWM_KEY}`
   fetch(weatherURL)
     .then((res) => res.json())
