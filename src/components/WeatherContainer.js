@@ -103,7 +103,7 @@ function WeatherContainer() {
                 </li>
                 <li
                   className="city"
-                  onClick={() => fetchData(setWeather, "Khorezm")}
+                  onClick={() => fetchData(setWeather, "Khiva")}
                 >
                   Khorezm
                 </li>
