@@ -24,13 +24,14 @@ function WeatherContainer() {
         <div
           className="weather-photo"
           style={
-            weather.definition === "Clear"  ?{
-              backgroundImage: "url(/images/clear-day.jpg)",
-              backgroundSize: "cover",
-              backgroundRepeat: "no-repeat",
-              backgroundPosition: "center",
-            } : null
-            
+            weather.definition === "Clear"
+              ? {
+                  backgroundImage: "url(/images/clear-day.jpg)",
+                  backgroundSize: "cover",
+                  backgroundRepeat: "no-repeat",
+                  backgroundPosition: "center",
+                }
+              : null
           }
         >
           <div className="weather__logo">
