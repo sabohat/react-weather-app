@@ -38,10 +38,14 @@ function WeatherContainer() {
             <b>the.weather</b>
           </div>
           <div className="weather__data">
+
+            
+            <div className="weather__data-details">
+            <div className="weather__description">
             <div className="weather__degree">
               {weather.temp ? weather.temp : 0}&#176;
             </div>
-            <div className="weather__data-details">
+            </div>
               <div className="weather__description">
                 <div className="weather__city">
                   {weather.location ? weather.location : "Not found"}

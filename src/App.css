@@ -86,7 +86,6 @@ li {
 }
 .weather__degree {
   font-size: 105px;
-  margin-bottom: -20px;
 }
 
 .weather__data-details {
@@ -227,6 +226,24 @@ li {
     margin: 0;
     height: 600px;
     width: 100%;
+  }
+  .weather__data{
+    height: 100px;
+    width: 100%;
+    padding: 10px;
+    justify-content: space-evenly;
+  }
+  .weather__data-details{
+    justify-content: space-around;
+  }
+  .weather__degree{
+    margin:0;
+    padding: 0;
+    font-size: 60px;
+    
+  }
+  .weather__city {
+    font-size: 30px;
   }
   .weather-info__input {
     width: 100%;
